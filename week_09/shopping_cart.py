@@ -15,9 +15,10 @@ class ShoppingCart:
         print("Select one of the following:\n"
             "1. Add item\n"
             "2. View cart\n"
-            "3. Remove item\n"
-            "4. Compute total\n"
-            "5. Quit\n")
+            "3. Edit item\n"
+            "4. Remove item\n"
+            "5. Compute total\n"
+            "6. Quit\n")
         return input("Please, enter an action: ")
 
     def run_next_step(self, action):
@@ -27,10 +28,12 @@ class ShoppingCart:
             case "2":
                 return self.view_cart()
             case "3":
-                return self.remove_item()
+                return self.edit_item()
             case "4":
-                return self.compute_total()
+                return self.remove_item()
             case "5":
+                return self.compute_total()
+            case "6":
                 return self.quit()
             case _:
                 print("Invalid option.")
@@ -68,6 +71,40 @@ class ShoppingCart:
             self.prices.pop(item)
             print("Item removed.")
             sleep(1)
+        except:
+            print("Wrong value inserted. Please type the number of the item in the list.")
+
+    def edit_item(self):
+        self.view_cart()
+
+        try:
+            item_index = int(input("Which item would you like to edit? "))
+            item_index = item_index - 1
+
+            item = self.products[item_index]
+            price = self.prices[item_index]
+
+            if item:
+                new_name = input(f"What is the new name for the item? ({item}) ")
+                self.products[item_index] = new_name if new_name != '' else item
+
+                new_price = input(f"What is the price of \"{self.products[item_index]}\"? ({price}) ")
+
+                if new_price == '':
+                    new_price = price
+
+                try:
+                    new_price = float(new_price)
+                    self.prices[item_index] = new_price
+
+                    print(f"The item was updated.")
+                    sleep(1)
+                    
+                except:
+                    print("The price should be a number")
+            else:
+                print("Wrong value inserted. Please type the number of the item in the list.")
+                
         except:
             print("Wrong value inserted. Please type the number of the item in the list.")
 
