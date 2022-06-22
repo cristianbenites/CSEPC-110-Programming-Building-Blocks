@@ -11,7 +11,8 @@ class ShoppingCart:
         self.system_is_running = True
 
     def get_menu_action(self):
-        print("\nSelect one of the following:\n"
+        print(f"\nYour current list has {len(self.products)} item{'s' if len(self.products) != 1 else ''}.")
+        print("Select one of the following:\n"
             "1. Add item\n"
             "2. View cart\n"
             "3. Remove item\n"
