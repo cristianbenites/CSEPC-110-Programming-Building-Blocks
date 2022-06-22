@@ -51,8 +51,9 @@ class ShoppingCart:
 
     def view_cart(self):
         print("The contents of the shopping cart are: ")
+        print("ITEM                              PRICE")
         for index, product in enumerate(self.products):
-            print(f"{index + 1}. {product.capitalize()} - ${self.prices[index]:,.2f}")
+            print(f"{index + 1}. {product.capitalize(): <30} - ${self.prices[index]:,.2f}")
         sleep(1)
 
     def remove_item(self):
